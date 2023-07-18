@@ -6,21 +6,20 @@ import java.util.Scanner;
 public class Game {
 
     int GameId;
+    String name1,name2;
     Deque<Player> players;
     Board gameBoard;
 
-    Game(int GameId)
+    Game(int GameId,String name1,String name2)
     {
         this.GameId=GameId;
-    }
+        this.name1=name1;
+        this.name2=name2;
 
-    public void initializeGame(){
-
-        //creating 2 Players
         players = new LinkedList<>();
-        Player player1 = new Player(PieceType.X,"X");
+        Player player1 = new Player(PieceType.X,this.name1);
 
-        Player player2 = new Player(PieceType.O,"O");
+        Player player2 = new Player(PieceType.O,this.name2);
 
         players.add(player1);
         players.add(player2);
@@ -29,7 +28,7 @@ public class Game {
         gameBoard = new Board(3);
     }
 
-    public String startGame(int inputRow,int inputColumn){
+    public String makeMove(int inputRow,int inputColumn){
 
 
             //take out the player whose turn is and also put the player in the list back
@@ -40,11 +39,6 @@ public class Game {
             if(freeSpaces.isEmpty()) {
                 return "tie";
             }
-
-
-
-
-
 
             //place the piece
             boolean pieceAddedSuccessfully = gameBoard.addPiece(inputRow,inputColumn, playerTurn.playingPiece);
